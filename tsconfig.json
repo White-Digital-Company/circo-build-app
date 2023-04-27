@@ -1,0 +1,28 @@
+// prettier-ignore
+{
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "lib": ["es2020"],
+    "importsNotUsedAsValues": "error",
+    "noPropertyAccessFromIndexSignature": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "baseUrl": "src",
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@uikit/*": ["uikit/*"],
+      "@screens/*": ["screens/*"],
+      "@api": ["common/api/index"],
+      "@api/*": ["common/api/*"],
+      "@models/*": ["common/models/*"],
+      "@tools/*": ["common/tools/*"],
+      "@hooks": ["common/hooks/index"],
+      "@hooks/*": ["common/hooks/*"],
+      "@mocks/*": ["common/mocks/*"],
+      "@navigation/*": ["common/navigation/*"],
+      "@constants/*": ["common/constants/*"],
+      "@i18n": ["common/i18n/index"]
+    }
+  },
+}

@@ -1,0 +1,53 @@
+{
+  "screens": {
+    "home": {
+      "buttons": {
+        "scan": "Skanna QR-kod"
+      },
+      "title": {
+        "about": "Mer om CircoBuild",
+        "url": "www.propare.se"
+      }
+    },
+    "product": {
+      "title": "Produkt",
+      "incomplete": "Produktinformationen för denna produkt är ofullständig",
+      "not_project": "Denna produkt är inte en del av detta projekt",
+      "labels": {
+        "passport": "Digitalt produktpass",
+        "gtin": "GTIN:",
+        "brand": "Varumärke:",
+        "subBrand": "Undervarumärke:",
+        "brandOwner": "Leverantör:",
+        "product": "Produkttyp:",
+        "size": "Storlek:",
+        "height": "Förpackningens höjd:",
+        "width": "Förpackningens bredd:",
+        "depth": "Förpackningens djup:",
+        "weight": "Bruttovikt inkl förpackning:",
+        "certification": "Certifieringar:",
+        "country": "Tillverkningsland:",
+        "not_certification": "Certifieringsinformation hittades inte"
+      },
+      "buttons": {
+        "more": "(se mer)"
+      }
+    },
+    "certification": {
+      "labels": {
+        "license": "Licensnummer:",
+        "status": "Certifieringssta\u00ADtus:",
+        "holder": "Licensinneha\u00ADvare:",
+        "agency": "Certifieringsorgan:"
+      }
+    }
+  },
+  "modals": {
+    "firstApp": {
+      "title": "Denna applikation fungerar endast med QR koder distribuerade av CircoBuild projektet.",
+      "buttons": {
+        "ok": "Okej"
+      }
+    }
+  }
+}

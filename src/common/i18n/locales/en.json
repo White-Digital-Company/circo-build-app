@@ -1,0 +1,53 @@
+{
+  "screens": {
+    "home": {
+      "buttons": {
+        "scan": "Scan QR-code"
+      },
+      "title": {
+        "about": "More about CircoBuild",
+        "url": "www.propare.eu"
+      }
+    },
+    "product": {
+      "title": "Product",
+      "incomplete": "There are not enough info about this product",
+      "not_project": "This product is not part of this project",
+      "labels": {
+        "passport": "Digital Product Passport",
+        "gtin": "GTIN:",
+        "brand": "Brand:",
+        "subBrand": "Sub Brand:",
+        "brandOwner": "Brand Owner:",
+        "product": "Product Name:",
+        "size": "Size:",
+        "height": "Package Height:",
+        "width": "Package Width:",
+        "depth": "Package Depth:",
+        "weight": "Gross Weight:",
+        "certification": "Certification:",
+        "country": "Country:",
+        "not_certification": "Certification information not found"
+      },
+      "buttons": {
+        "more": "(see more)"
+      }
+    },
+    "certification": {
+      "labels": {
+        "license": "License Number:",
+        "status": "Certification Status:",
+        "holder": "License Holder:",
+        "agency": "Certification Body:"
+      }
+    }
+  },
+  "modals": {
+    "firstApp": {
+      "title": "This application only works with QR codes distributed by the CircoBuild project.",
+      "buttons": {
+        "ok": "Okay"
+      }
+    }
+  }
+}
