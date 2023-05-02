@@ -17,10 +17,12 @@ const PrimaryButton = ({
 }: PrimaryButtonProps) => {
   return (
     <TouchableHighlight
-      style={tw`rounded-full bg-dark_blue py-16px justify-center items-center ${buttonStyle}`}
+      style={tw`rounded-full bg-white border-dark_gray border-[5px] py-16px justify-center items-center ${buttonStyle}`}
+      activeOpacity={0.2}
+      underlayColor="#fff"
       {...props}
     >
-      <Text style={tw`text-white`}>{title}</Text>
+      <Text style={tw`text-dark_gray font-bold`}>{title}</Text>
     </TouchableHighlight>
   )
 }

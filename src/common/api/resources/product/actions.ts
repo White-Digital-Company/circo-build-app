@@ -1,12 +1,12 @@
 import httpClient from '@api/httpClient'
-import axios from 'axios'
-import { productApi } from '@api'
 import type {
   Barcode,
+  Product,
+  ProductCertification,
   ProductLinksSetResponse,
   RemoteProductData,
 } from '@models/product'
-import { getProductDataLinks, getProductInfoByGSLink } from '@tools/product'
+import { getProductDataLinks } from '@tools/product'
 import { generateRequestLinkByBarcode, getCodeByBarcode } from '@tools/barcode'
 
 const getProductData = async (barcode: Barcode): Promise<RemoteProductData> => {
@@ -22,31 +22,22 @@ const getProductData = async (barcode: Barcode): Promise<RemoteProductData> => {
 
   const links = getProductDataLinks(data, code)
 
-  if (!Object.values(links.pip).some(val => !!val)) {
+  if (!links.pip) {
     return { type: 'ERROR' }
   }
 
-  const productData = await getProductInfoByGSLink(links.pip)
+  const { data: productData } = await httpClient.get<Product>(links.pip)
 
-  const certificationData = await productApi
-    .getProductDataByLink(links.certification)
-    .catch(error => {
-      if (error.response.data === 'Ok') {
-        return 'Ok'
-      }
-      return null
-    })
+  const { data: certificationData } =
+    await httpClient.get<ProductCertification>(links.certification ?? '')
 
-  return { type: 'SUCCESS', pip: productData, certification: certificationData }
-}
-
-const getProductDataByLink = async (link: string) => {
-  const res = await axios.get(link)
-
-  return res.data
+  return {
+    type: 'SUCCESS',
+    pip: productData,
+    certification: certificationData ?? null,
+  }
 }
 
 export default {
   getProductData,
-  getProductDataByLink,
 }

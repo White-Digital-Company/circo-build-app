@@ -18,7 +18,6 @@ export type RootStackParamList = {
   }
   Certification: {
     barcode: Barcode
-    language: 'en' | 'sv'
   }
 }
 
@@ -38,9 +37,11 @@ const RootRouter = () => {
       initialRouteName="Home"
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#162345',
+          backgroundColor: '#3F4044',
+          borderWidth: 0,
         },
         headerTintColor: '#fff',
+        headerShadowVisible: false,
       }}
     >
       <Stack.Screen
@@ -61,7 +62,7 @@ const RootRouter = () => {
       <Stack.Screen
         name="Certification"
         component={CertificationScreen}
-        options={{ title: '' }}
+        options={{ title: t('screens.certification.title') }}
       />
     </Stack.Navigator>
   )

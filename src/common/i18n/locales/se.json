@@ -21,24 +21,27 @@
         "brandOwner": "Leverantör:",
         "product": "Produkttyp:",
         "size": "Storlek:",
-        "height": "Förpackningens höjd:",
-        "width": "Förpackningens bredd:",
+        "height": "Höjd:",
+        "width": "Bredd:",
         "depth": "Förpackningens djup:",
         "weight": "Bruttovikt inkl förpackning:",
         "certification": "Certifieringar:",
         "country": "Tillverkningsland:",
-        "not_certification": "Certifieringsinformation hittades inte"
+        "not_certification": "Certifieringsinformation hittades inte",
+        "uValue": "U-värde produkt:"
       },
       "buttons": {
         "more": "(se mer)"
       }
     },
     "certification": {
+      "title": "Certifiering",
       "labels": {
-        "license": "Licensnummer:",
-        "status": "Certifieringssta\u00ADtus:",
-        "holder": "Licensinneha\u00ADvare:",
-        "agency": "Certifieringsorgan:"
+        "license": "Registrerings\u00ADnummer:",
+        "module": "Module:",
+        "gwp": "Licensinneha\u00ADvare:",
+        "agency": "Certifiering\u00ADsorgan:",
+        "subject": "Deklarationsä\u00ADgare:"
       }
     }
   },

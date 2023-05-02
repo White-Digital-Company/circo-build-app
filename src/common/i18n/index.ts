@@ -2,18 +2,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import i18n, { LanguageDetectorAsyncModule } from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import * as RNLocalize from 'react-native-localize'
-import translationEN from './locales/en.json'
 import translationSE from './locales/se.json'
 
 const CACHE_LANGUAGE_KEY = 'i18n_language'
 
-const LANGUAGES = ['en', 'se'] as const
+const LANGUAGES = ['se'] as const
 
 export const defaultNS = 'translation'
 
 export type Language = typeof LANGUAGES[number]
 
-export const FALLBACK_LANG: Language = 'en'
+export const FALLBACK_LANG: Language = 'se'
 
 const cacheUserLanguage = async (lang: Language) => {
   await AsyncStorage.setItem(CACHE_LANGUAGE_KEY, lang)
@@ -29,7 +28,6 @@ export const changeLanguage = async (lang: Language) => {
 }
 
 export const resources = {
-  en: { translation: translationEN },
   se: { translation: translationSE },
 } as const
 

@@ -1,1 +1,1 @@
-export default {}
+export { default as SvgView } from './SvgView'
