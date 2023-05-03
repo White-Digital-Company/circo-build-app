@@ -23,7 +23,10 @@ const HomeScreen = () => {
             onPress={() => navigation.navigate('Barcode')}
             // onPress={() =>
             //   navigation.navigate('Product', {
-            //     barcode: { type: 'CODE', data: '7058541711995' },
+            //     barcode: {
+            //       type: 'URL',
+            //       data: 'http://id.nordan.com/01/7058541711995/10/skxso772',
+            //     },
             //   })
             // }
             title={t('screens.home.buttons.scan')}
