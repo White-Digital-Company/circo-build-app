@@ -18,6 +18,7 @@ export type RootStackParamList = {
   }
   Certification: {
     barcode: Barcode
+    type: 'SECURITY' | 'AGENCY'
   }
 }
 

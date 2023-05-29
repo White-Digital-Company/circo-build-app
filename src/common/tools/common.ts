@@ -36,3 +36,20 @@ export const convertJSONFormDataToFormData = (data: { _parts: string[][] }) => {
 
   return formData
 }
+
+export const getPathArrayFromString = (value: string) => {
+  return value.split('.')
+}
+
+export const setObjectProperty = (path: string[], value: unknown) => {
+  let object: any = {}
+  const limit = path.length - 1
+
+  for (let i = 0; i < limit; i + 1) {
+    const key = path[i]
+    object = object[key] ?? (object[key] = {})
+  }
+
+  const key = path[limit]
+  object[key] = value
+}

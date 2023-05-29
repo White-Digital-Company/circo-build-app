@@ -21,14 +21,20 @@
         "brandOwner": "Leverantör:",
         "product": "Produkttyp:",
         "size": "Storlek:",
-        "height": "Höjd:",
+        "height": "Djup:",
         "width": "Bredd:",
-        "depth": "Förpackningens djup:",
-        "weight": "Bruttovikt inkl förpackning:",
+        "depth": "Höjd:",
+        "weight": "Vikt:",
         "certification": "Certifieringar:",
         "country": "Tillverkningsland:",
+        "frequencyBand": "Wifi-fkrekvens\u00ADband:",
+        "spreadSpectrum": "Spridningss\u00ADpectrum:",
+        "energyConsumption": "Energiförbruk\u00ADning:",
+        "energyConsuption": "Energiförbruk\u00ADning:",
         "not_certification": "Certifieringsinformation hittades inte",
-        "uValue": "U-värde produkt:"
+        "uValue": "U-värde produkt:",
+        "warrantyScopeDescription": "Garantins omfattning:",
+        "durationOfWarranty": "Garantins varaktighet:"
       },
       "buttons": {
         "more": "(se mer)"
@@ -41,7 +47,11 @@
         "module": "Module:",
         "gwp": "GWP:",
         "agency": "Certifiering\u00ADsorgan:",
-        "subject": "Deklarationsä\u00ADgare:"
+        "subject": "Deklarationsä\u00ADgare:",
+        "encryptionAlgorithm": "Krypteringsalgo\u00ADritm:",
+        "administrationProtocol": "Administrations\u00ADprotokoll:",
+        "verificationProtocol": "Verifierings\u00ADprotokoll:",
+        "authenticationProtocol": "Verifierings\u00ADprotokoll:"
       }
     }
   },

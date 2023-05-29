@@ -18,7 +18,7 @@ const CertificationScreen = () => {
   if (
     !query.isSuccess ||
     query.data.type === 'ERROR' ||
-    !query.data.certification
+    (params.type === 'AGENCY' && !query.data.certification)
   ) {
     return null
   }
@@ -41,46 +41,88 @@ const CertificationScreen = () => {
           source={require('@assets/images/background.png')}
         >
           <Text style={tw`font-bold text-xl w-full text-center`}>
-            {query.data.certification.agency}
+            {params.type === 'AGENCY'
+              ? query.data.certification!.agency
+              : 'Säkerhetsdata'}
           </Text>
         </ImageBackground>
-        <View style={tw`grow w-full p-[35px] px-[16px] justify-center`}>
-          {query.data.certification.agency && (
-            <Label
-              title={t('screens.certification.labels.agency')}
-              value={query.data.certification.agency as string}
-              titleWidthPercent={55}
-            />
-          )}
-          {query.data.certification.subject && (
-            <Label
-              title={t('screens.certification.labels.subject')}
-              value={query.data.certification.subject as string}
-              titleWidthPercent={55}
-            />
-          )}
-          {query.data.certification.license && (
-            <Label
-              title={t('screens.certification.labels.license')}
-              value={query.data.certification.license as string}
-              titleWidthPercent={55}
-            />
-          )}
-          {query.data.certification.module && (
-            <Label
-              title={t('screens.certification.labels.module')}
-              value={query.data.certification.module as string}
-              titleWidthPercent={55}
-            />
-          )}
-          {query.data.certification.gwp && (
-            <Label
-              title={t('screens.certification.labels.gwp')}
-              value={query.data.certification.gwp as string}
-              titleWidthPercent={55}
-            />
-          )}
-        </View>
+        {params.type === 'AGENCY' && (
+          <View style={tw`grow w-full p-[35px] px-[16px] justify-center`}>
+            {query.data.certification.agency && (
+              <Label
+                title={t('screens.certification.labels.agency')}
+                value={query.data.certification.agency as string}
+                titleWidthPercent={55}
+              />
+            )}
+            {query.data.certification.subject && (
+              <Label
+                title={t('screens.certification.labels.subject')}
+                value={query.data.certification.subject as string}
+                titleWidthPercent={55}
+              />
+            )}
+            {query.data.certification.license && (
+              <Label
+                title={t('screens.certification.labels.license')}
+                value={query.data.certification.license as string}
+                titleWidthPercent={55}
+              />
+            )}
+            {query.data.certification.module && (
+              <Label
+                title={t('screens.certification.labels.module')}
+                value={query.data.certification.module as string}
+                titleWidthPercent={55}
+              />
+            )}
+            {query.data.certification.gwp && (
+              <Label
+                title={t('screens.certification.labels.gwp')}
+                value={query.data.certification.gwp as string}
+                titleWidthPercent={55}
+              />
+            )}
+          </View>
+        )}
+        {params.type === 'SECURITY' && query.data.pip.securityData && (
+          <View style={tw`grow w-full p-[35px] px-[16px] justify-center`}>
+            {query.data.pip.securityData.encryptionAlgorithm && (
+              <Label
+                title={t('screens.certification.labels.encryptionAlgorithm')}
+                value={query.data.pip.securityData.encryptionAlgorithm}
+                titleWidthPercent={52}
+              />
+            )}
+            {query.data.pip.securityData.administrationProtocol && (
+              <Label
+                title={t('screens.certification.labels.administrationProtocol')}
+                value={
+                  query.data.pip.securityData.administrationProtocol as string
+                }
+                titleWidthPercent={52}
+              />
+            )}
+            {query.data.pip.securityData.verificationProtocol && (
+              <Label
+                title={t('screens.certification.labels.verificationProtocol')}
+                value={
+                  query.data.pip.securityData.verificationProtocol as string
+                }
+                titleWidthPercent={52}
+              />
+            )}
+            {query.data.pip.securityData.AuthenticationProtocol && (
+              <Label
+                title={t('screens.certification.labels.authenticationProtocol')}
+                value={
+                  query.data.pip.securityData.AuthenticationProtocol as string
+                }
+                titleWidthPercent={52}
+              />
+            )}
+          </View>
+        )}
       </ScrollView>
       <View style={tw`w-full items-center justify-center pb-[20px] pt-[14px]`}>
         <Text

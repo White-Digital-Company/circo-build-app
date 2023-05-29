@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { View, Text, ScrollView, ImageBackground, Image } from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import type {
@@ -6,10 +5,8 @@ import type {
   RootRouterNavigationProps,
 } from '@navigation/RootRouter'
 import { useProduct } from '@api'
-import { Shadow } from 'react-native-shadow-2'
 import tw from '@tools/tailwind'
 import Label from '@uikit/molecules/rows/Label'
-import FlagButton from '@uikit/molecules/Buttons/FlagButton'
 import { useTranslation } from 'react-i18next'
 import ProductLoaderSkeleton from './components/ProductLoaderSkeleton/index'
 import { getCodeByBarcode } from '@tools/barcode'
@@ -23,6 +20,19 @@ const ProductScreen = () => {
 
   const query = useProduct(params.barcode)
   const code = getCodeByBarcode(params.barcode)
+
+  const getImageAssetPath = () => {
+    switch (code) {
+      case '07350140760047':
+        return require('@assets/images/07350140760047.png')
+      case '07350140760054':
+        return require('@assets/images/07350140760054.png')
+      case '7058541711995':
+        return require('@assets/images/product.png')
+      default:
+        return
+    }
+  }
 
   if (query.isLoading) {
     return <ProductLoaderSkeleton />
@@ -74,11 +84,19 @@ const ProductScreen = () => {
             style={tw`p-[24px] mb-[40px] pt-[70px] items-center`}
             source={require('@assets/images/background.png')}
           >
-            <Image
-              source={require('@assets/images/product.png')}
-              style={tw`w-[65%] h-[240px] rounded-[4px] bg-white`}
-              resizeMode="cover"
-            />
+            {query.data.pip.image ? (
+              <Image
+                source={{ uri: query.data.pip.image }}
+                style={tw`w-[75%] h-[240px] rounded-[4px] bg-white`}
+                resizeMode="cover"
+              />
+            ) : (
+              <Image
+                source={getImageAssetPath()}
+                style={tw`w-[75%] h-[240px] rounded-[4px] bg-white`}
+                resizeMode="cover"
+              />
+            )}
           </ImageBackground>
           <View style={tw`px-[16px]`}>
             <Label title={t('screens.product.labels.gtin')} value={code} />
@@ -88,10 +106,40 @@ const ProductScreen = () => {
                 value={query.data.pip.brandName ?? ''}
               />
             )}
+            {query.data.pip.brandOwner && (
+              <Label
+                title={t('screens.product.labels.brandOwner')}
+                value={query.data.pip.brandOwner ?? ''}
+              />
+            )}
             {query.data.pip.productName && (
               <Label
                 title={t('screens.product.labels.product')}
                 value={query.data.pip.productName ?? ''}
+              />
+            )}
+            {query.data.pip.frequencyBand && (
+              <Label
+                title={t('screens.product.labels.frequencyBand')}
+                value={query.data.pip.frequencyBand ?? ''}
+              />
+            )}
+            {query.data.pip.spreadSpectrum && (
+              <Label
+                title={t('screens.product.labels.spreadSpectrum')}
+                value={query.data.pip.spreadSpectrum ?? ''}
+              />
+            )}
+            {query.data.pip.energyConsuption && (
+              <Label
+                title={t('screens.product.labels.energyConsuption')}
+                value={query.data.pip.energyConsuption ?? ''}
+              />
+            )}
+            {query.data.pip.energyConsumption && (
+              <Label
+                title={t('screens.product.labels.energyConsumption')}
+                value={query.data.pip.energyConsumption ?? ''}
               />
             )}
             {query.data.pip.packageWidth && (
@@ -104,6 +152,30 @@ const ProductScreen = () => {
               <Label
                 title={t('screens.product.labels.height')}
                 value={query.data.pip.packageHeight ?? ''}
+              />
+            )}
+            {query.data.pip.packageDepth && (
+              <Label
+                title={t('screens.product.labels.depth')}
+                value={query.data.pip.packageDepth ?? ''}
+              />
+            )}
+            {query.data.pip.packageWeight && (
+              <Label
+                title={t('screens.product.labels.weight')}
+                value={query.data.pip.packageWeight ?? ''}
+              />
+            )}
+            {query.data.pip.warrantyScopeDescription && (
+              <Label
+                title={t('screens.product.labels.warrantyScopeDescription')}
+                value={query.data.pip.warrantyScopeDescription ?? ''}
+              />
+            )}
+            {query.data.pip.durationOfWarranty && (
+              <Label
+                title={t('screens.product.labels.durationOfWarranty')}
+                value={query.data.pip.durationOfWarranty ?? ''}
               />
             )}
             {query.data.pip.uValue && (
@@ -120,11 +192,25 @@ const ProductScreen = () => {
                   isButton
                   onPress={() =>
                     navigation.navigate('Certification', {
+                      type: 'AGENCY',
                       barcode: params.barcode,
                     })
                   }
                 />
               )}
+            {query.data.pip.securityData && (
+              <Label
+                title={t('screens.product.labels.certification')}
+                value="Certifierade"
+                isButton
+                onPress={() =>
+                  navigation.navigate('Certification', {
+                    type: 'SECURITY',
+                    barcode: params.barcode,
+                  })
+                }
+              />
+            )}
           </View>
         </ScrollView>
       )}

@@ -7,18 +7,20 @@ export const getCodeByBarcode = (barcode: Barcode) => {
       const barcodeUrl = new URL(barcode.data)
       const queryParams = barcodeUrl.searchParams
 
-      return queryParams.get('gtin')
+      return queryParams.get('gtin') || ''
     }
 
     if (barcode.data.includes('id.nordan.com')) {
       const barcodeData = barcode.data.split('/')
 
-      return barcodeData.find(val => val.replace(/[a-z]/g, '').length > 12)
+      return (
+        barcodeData.find(val => val.replace(/[a-z]/g, '').length > 12) || ''
+      )
     }
 
     const barcodeData = barcode.data.split('/')
 
-    return barcodeData.find(el => el.length > 12) ?? ''
+    return barcodeData.find(el => el.length > 12) || ''
   }
 
   return barcode.data

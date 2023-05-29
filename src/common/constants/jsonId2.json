@@ -1,0 +1,97 @@
+{
+    "@context": {
+        "gs1": "http://gs1.org/voc/",
+        "schema": "https://schema.org/",
+        "@vocab": "http://gs1.org/voc/"
+    },
+    "@type": "gs1:Product",
+    "@id": "https://id.gs1.org/01/07350140760047",
+    "brand": {
+        "@type": "gs1:Brand",
+        "brandName": [
+            {
+                "@value": "1000Z",
+                "@language": "sv"
+            }
+        ]
+    },
+    "brandOwner": {
+        "organizationName": [
+            {
+                "@value": "Route me Up",
+                "@language": "sv"
+            }
+        ],
+        "@type": "gs1:Organization"
+    },
+    "productName": {
+        "@value": "Trådlös accesspunkt",
+        "@language": "sv"
+    },
+    "Frekvensband": {
+        "@value": "2,4 GHz, 5 GHz",
+        "@language": "sv"
+    },
+    "Speridningsspectrum": {
+        "@value": "OFDM",
+        "@language": "sv"
+    },
+    "inPackageHeight": {
+        "value": {
+            "@value": "3,99",
+            "@type": "xsd:float"
+        },
+        "unitCode": "CMT",
+        "@type": "gs1:QuantitativeValue"
+    },
+    "inPackageWidth": {
+        "value": {
+            "@value": "4,8",
+            "@type": "xsd:float"
+        },
+        "unitCode": "CMT",
+        "@type": "gs1:QuantitativeValue"
+    },
+    "inPackageDepth": {
+        "value": {
+            "@value": "15,04",
+            "@type": "xsd:float"
+        },
+        "unitCode": "CMT",
+        "@type": "gs1:QuantitativeValue"
+    },
+    "grossWeight": {
+        "value": {
+            "@value": "330",
+            "@type": "xsd:float"
+        },
+        "unitCode": "GRM",
+        "@type": "gs1:QuantitativeValue"
+    },
+    "Energiförbrukning": {
+        "value": {
+            "@value": "9,2",
+            "@type": "xsd:float"
+        },
+        "unitCode": "KWH",
+        "@type": "gs1:QuantitativeValue"
+    },
+    "Krypteringsalgoritm": {
+        "@value": "AES, PEAP, PEAPv1, TLS, TTLS, WPA, WPA2, WPA2 - Enerprise, WPA3",
+        "@language": "sv"
+    },
+    "Administrationsprotokoll": {
+        "@value": "HTTP, RADIUS",
+        "@language": "sv"
+    },
+    "Verifieringspprotokoll": {
+        "@value": "EAP-FAST, EAP-SIM, EAP-TLS, Extentional application protocoll (EAP), RADIUS",
+        "@language": "sv"
+    },
+    "image": {
+        "referencedFileURL": "https://somethingGS1.jpg",
+        "filePixelHeight": 700,
+        "filePixelWidth": 700,
+        "@type": "gs1:ReferencedFileDetails"
+    }
+}

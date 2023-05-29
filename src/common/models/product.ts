@@ -52,18 +52,34 @@ export interface ProductCertification {
 
 export interface Product {
   gtin: string
-  brandName: string
-  productName: string
-  packageHeight: string
-  packageWidth: string
-  uValue: string
-  certification: ProductCertification
+  brandName?: string
+  productName?: string
+  packageHeight?: string
+  packageWidth?: string
+  packageWeight?: string //
+  uValue?: string
+  certification?: ProductCertification
+  brandOwner?: string
+  frequencyBand?: string
+  spreadSpectrum?: string
+  energyConsuption?: string
+  energyConsumption?: string
+  packageDepth?: string
+  warrantyScopeDescription?: string
+  durationOfWarranty?: string
+  image?: string
+  securityData?: {
+    encryptionAlgorithm: string
+    administrationProtocol: string
+    verificationProtocol?: string
+    AuthenticationProtocol?: string
+  }
 }
 
 export interface RemoteSuccessProductData {
   type: 'SUCCESS'
   pip: Product
-  certification: ProductCertification
+  certification: ProductCertification | null
 }
 
 export type RemoteProductError = 'NO-PIP'
@@ -99,3 +115,71 @@ export interface Certification {
   agency?: string
   url?: string
 }
+
+export type GSType = 'gs1:Product'
+
+export type GSLanguage = 'en' | 'sv'
+
+export interface GSValue {
+  '@value': string
+  '@language': GSLanguage
+}
+
+export interface GSDataWithType {
+  '@type': string
+  [key: string]: GSValue[] | string
+}
+
+export type GSData = GSValue | GSValue[] | GSDataWithType
+
+export interface GSUnitValue {
+  value: {
+    '@value': string
+    '@type': string
+  }
+  unitCode: string
+  '@type': string
+}
+
+export interface GSImage {
+  referencedFileURL: string
+  filePixelHeight: number
+  filePixelWidth: number
+  '@type': string
+}
+
+export interface GSProduct {
+  '@context': {
+    gs1: 'http://gs1.org/voc/'
+    schema: 'https://schema.org/'
+    '@vocab': 'http://gs1.org/voc/'
+  }
+  '@type': GSType
+  '@id': string
+  brand?: GSData
+  brandOwner?: GSData
+  productName?: GSData
+  Frekvensband?: GSData
+  Speridningsspectrum?: GSData
+  inPackageHeight: GSUnitValue
+  inPackageWidth: GSUnitValue
+  inPackageDepth: GSUnitValue
+  grossWeight: GSUnitValue
+  energiFörbrukning: GSUnitValue
+  Krypteringsalgoritm?: GSData
+  Administrationsprotokoll?: GSData
+  Verifieringsprotokoll?: GSData
+  image: GSImage
+}
+
+type DotPrefix<T extends string> = T extends '' ? '' : `.${T}`
+
+export type DotNestedKeys<T> = (
+  T extends object
+    ? {
+        [K in Exclude<keyof T, symbol>]: `${K}${DotPrefix<DotNestedKeys<T[K]>>}`
+      }[Exclude<keyof T, symbol>]
+    : ''
+) extends infer D
+  ? Extract<D, string>
+  : never

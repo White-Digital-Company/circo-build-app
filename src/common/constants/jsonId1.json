@@ -1,0 +1,97 @@
+{
+    "@context": {
+        "gs1": "http://gs1.org/voc/",
+        "schema": "https://schema.org/",
+        "@vocab": "http://gs1.org/voc/"
+    },
+    "@type": "gs1:Product",
+    "@id": "https://id.gs1.org/01/07350140760054",
+    "brand": {
+        "@type": "gs1:Brand",
+        "brandName": [
+            {
+                "@value": "2X",
+                "@language": "sv"
+            }
+        ]
+    },
+    "brandOwner": {
+        "organizationName": [
+            {
+                "@value": "Route up your sleeve",
+                "@language": "sv"
+            }
+        ],
+        "@type": "gs1:Organization"
+    },
+    "productName": {
+        "@value": "Trådlös accesspunkt",
+        "@language": "sv"
+    },
+    "Frekvensband": {
+        "@value": "2,4 GHz",
+        "@language": "sv"
+    },
+    "Speridningsspectrum": {
+        "@value": "OFDM",
+        "@language": "sv"
+    },
+    "inPackageHeight": {
+        "value": {
+            "@value": "2,1",
+            "@type": "xsd:float"
+        },
+        "unitCode": "CMT",
+        "@type": "gs1:QuantitativeValue"
+    },
+    "inPackageWidth": {
+        "value": {
+            "@value": "5,9",
+            "@type": "xsd:float"
+        },
+        "unitCode": "CMT",
+        "@type": "gs1:QuantitativeValue"
+    },
+    "inPackageDepth": {
+        "value": {
+            "@value": "5,9",
+            "@type": "xsd:float"
+        },
+        "unitCode": "CMT",
+        "@type": "gs1:QuantitativeValue"
+    },
+    "grossWeight": {
+        "value": {
+            "@value": "380",
+            "@type": "xsd:float"
+        },
+        "unitCode": "GRM",
+        "@type": "gs1:QuantitativeValue"
+    },
+    "energiFörbrukning": {
+        "value": {
+            "@value": "10,5",
+            "@type": "xsd:float"
+        },
+        "unitCode": "KWH",
+        "@type": "gs1:QuantitativeValue"
+    },
+    "Krypteringsalgoritm": {
+        "@value": "WEP, WPA, WPA2, WPA3, WPA3-Enterprise, WPA3-PSK ",
+        "@language": "sv"
+    },
+    "Administrationsprotokoll": {
+        "@value": "HTTP",
+        "@language": "sv"
+    },
+    "Verifieringsprotokoll": {
+        "@value": "RADIUS, X.509 certifikat",
+        "@language": "sv"
+    },
+    "image": {
+        "referencedFileURL": "https://somethingGS1.jpg",
+        "filePixelHeight": 700,
+        "filePixelWidth": 700,
+        "@type": "gs1:ReferencedFileDetails"
+    }
+}

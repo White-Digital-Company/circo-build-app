@@ -1,5 +1,9 @@
-import { PRODUCT_CERTIFICATION_AGENCY } from '@constants/product'
-import type { Link, ProductLinksSetResponse } from '@models/product'
+import {
+  GS_KEY_TO_PRODUCT_PIP,
+  PRODUCT_CERTIFICATION_AGENCY,
+} from '@constants/product'
+import type { GSProduct, Link, ProductLinksSetResponse } from '@models/product'
+import { getPathArrayFromString, setObjectProperty } from './common'
 
 export const getProductDataLinks = (
   data: ProductLinksSetResponse,
@@ -41,4 +45,82 @@ export const isProjectCertificationName = (name: string): boolean => {
   }
 
   return false
+}
+
+// const setParamsToObject
+
+export const getPipDataFromGSProduct = (product: any) => {
+  let productData: any = {}
+
+  for (const [key, value] of Object.entries(GS_KEY_TO_PRODUCT_PIP)) {
+    const productPath = getPathArrayFromString(key)
+
+    const valueData = product[productPath[0]]
+
+    if (!valueData) {
+      continue
+    }
+
+    if (key === 'image' && product[key] && product[key].referencedFileURL) {
+      Object.assign(productData, {
+        [value]: product[key].referencedFileURL,
+      })
+    }
+
+    if (Array.isArray(valueData)) {
+      const info = valueData.find(data => data['@language'] === 'sv')
+
+      const infoValue = info ? info['@value'] : null
+
+      Object.assign(productData, {
+        [value]: infoValue,
+      })
+    }
+
+    if (valueData['@language'] && valueData['@language'] === 'sv') {
+      Object.assign(productData, {
+        [value]: valueData['@value'],
+      })
+    }
+
+    if (valueData['@type'] && productPath[1] && valueData[productPath[1]]) {
+      const valueInfo = valueData[productPath[1]]
+
+      if (Array.isArray(valueInfo)) {
+        const info = valueInfo.find(data => data['@language'] === 'sv')
+
+        const infoValue = info ? info['@value'] : null
+
+        Object.assign(productData, {
+          [value]: infoValue,
+        })
+      } else {
+        const infoValue =
+          valueInfo && valueInfo['@language'] === 'sv'
+            ? valueInfo['@value']
+            : null
+
+        Object.assign(productData, {
+          [value]: infoValue,
+        })
+      }
+    }
+
+    if (valueData['@type'] && valueData['unitCode']) {
+      const valueInfo = valueData['value']['@value']
+
+      Object.assign(productData, {
+        [value]: `${valueInfo} ${valueData['unitCode']}`,
+      })
+    }
+  }
+
+  const securityData = {
+    encryptionAlgorithm: productData.encryptionAlgorithm ?? '',
+    administrationProtocol: productData.administrationProtocol ?? '',
+    verificationProtocol: productData.verificationProtocol ?? '',
+    AuthenticationProtocol: productData.AuthenticationProtocol ?? '',
+  }
+
+  return { ...productData, securityData }
 }

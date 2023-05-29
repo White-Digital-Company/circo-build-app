@@ -1,18 +1,34 @@
 import httpClient from '@api/httpClient'
 import type {
   Barcode,
+  GSProduct,
   Product,
   ProductCertification,
   ProductLinksSetResponse,
   RemoteProductData,
 } from '@models/product'
-import { getProductDataLinks } from '@tools/product'
+import { getPipDataFromGSProduct, getProductDataLinks } from '@tools/product'
 import { generateRequestLinkByBarcode, getCodeByBarcode } from '@tools/barcode'
+import axios from 'axios'
+import productPip from '@constants/jsonId2.json'
 
 const getProductData = async (barcode: Barcode): Promise<RemoteProductData> => {
-  const requestLink = generateRequestLinkByBarcode(barcode)
-
   const code = getCodeByBarcode(barcode)
+
+  if (productPip['@type'] === 'gs1:Product') {
+    const data = getPipDataFromGSProduct(productPip)
+
+    return {
+      type: 'SUCCESS',
+      pip: {
+        gtin: code,
+        ...data,
+      },
+      certification: null,
+    }
+  }
+
+  const requestLink = generateRequestLinkByBarcode(barcode)
 
   const { data } = await httpClient.get<ProductLinksSetResponse>(requestLink, {
     params: {
@@ -26,10 +42,16 @@ const getProductData = async (barcode: Barcode): Promise<RemoteProductData> => {
     return { type: 'ERROR' }
   }
 
-  const { data: productData } = await httpClient.get<Product>(links.pip)
+  const { data: productData } = await axios.get<Product>(links.pip)
 
-  const { data: certificationData } =
-    await httpClient.get<ProductCertification>(links.certification ?? '')
+  let certificationData: ProductCertification | null = null
+
+  if (links.certification) {
+    const { data } = await axios.get<ProductCertification>(
+      links.certification ?? '',
+    )
+    certificationData = data
+  }
 
   return {
     type: 'SUCCESS',
