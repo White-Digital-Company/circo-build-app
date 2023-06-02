@@ -2,8 +2,10 @@ import {
   GS_KEY_TO_PRODUCT_PIP,
   PRODUCT_CERTIFICATION_AGENCY,
 } from '@constants/product'
-import type { GSProduct, Link, ProductLinksSetResponse } from '@models/product'
-import { getPathArrayFromString, setObjectProperty } from './common'
+import type { Link, ProductLinksSetResponse } from '@models/product'
+import { getPathArrayFromString } from './common'
+// @ts-ignore
+import DOMParser from 'react-native-html-parser'
 
 export const getProductDataLinks = (
   data: ProductLinksSetResponse,
@@ -123,4 +125,26 @@ export const getPipDataFromGSProduct = (product: any) => {
   }
 
   return { ...productData, securityData }
+}
+
+export const getProductDataFromHTML = (html: string) => {
+  const parser = new DOMParser.DOMParser()
+
+  const parsed = parser.parseFromString(html, 'text/html')
+  const scriptData = parsed.querySelect('script=[type="application/ld+json"]')
+
+  for (const script of scriptData) {
+    let parsedData
+    try {
+      parsedData = JSON.parse(script.childNodes['0'].data)
+    } catch (error) {
+      console.log('parse error', error)
+    }
+
+    if (parsedData && parsedData['@context'].gs1) {
+      return parsedData
+    }
+  }
+
+  return null
 }

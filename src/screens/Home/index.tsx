@@ -20,15 +20,15 @@ const HomeScreen = () => {
             resizeMode="contain"
           />
           <PrimaryButton
-            // onPress={() => navigation.navigate('Barcode')}
-            onPress={() =>
-              navigation.navigate('Product', {
-                barcode: {
-                  type: 'URL',
-                  data: 'http://id.nordan.com/01/07350140760047/10/skxso772',
-                },
-              })
-            }
+            onPress={() => navigation.navigate('Barcode')}
+            // onPress={() =>
+            //   navigation.navigate('Product', {
+            //     barcode: {
+            //       type: 'URL',
+            //       data: 'https://id.gs1.se/01/7058541711995',
+            //     },
+            //   })
+            // }
             title={t('screens.home.buttons.scan')}
             buttonStyle="w-[75%]"
           />

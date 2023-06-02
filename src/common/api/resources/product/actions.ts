@@ -7,26 +7,16 @@ import type {
   ProductLinksSetResponse,
   RemoteProductData,
 } from '@models/product'
-import { getPipDataFromGSProduct, getProductDataLinks } from '@tools/product'
+import {
+  getPipDataFromGSProduct,
+  getProductDataFromHTML,
+  getProductDataLinks,
+} from '@tools/product'
 import { generateRequestLinkByBarcode, getCodeByBarcode } from '@tools/barcode'
 import axios from 'axios'
-import productPip from '@constants/jsonId2.json'
 
 const getProductData = async (barcode: Barcode): Promise<RemoteProductData> => {
   const code = getCodeByBarcode(barcode)
-
-  if (productPip['@type'] === 'gs1:Product') {
-    const data = getPipDataFromGSProduct(productPip)
-
-    return {
-      type: 'SUCCESS',
-      pip: {
-        gtin: code,
-        ...data,
-      },
-      certification: null,
-    }
-  }
 
   const requestLink = generateRequestLinkByBarcode(barcode)
 
@@ -43,6 +33,21 @@ const getProductData = async (barcode: Barcode): Promise<RemoteProductData> => {
   }
 
   const { data: productData } = await axios.get<Product>(links.pip)
+
+  if (typeof productData === 'string') {
+    const parsedProduct = getProductDataFromHTML(productData)
+
+    const data = getPipDataFromGSProduct(parsedProduct)
+
+    return {
+      type: 'SUCCESS',
+      pip: {
+        gtin: code,
+        ...data,
+      },
+      certification: null,
+    }
+  }
 
   let certificationData: ProductCertification | null = null
 
